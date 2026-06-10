@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workout Plan</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F7F4EF;
+    --ink: #1A1A18;
+    --rose: #C97B6A;
+    --rose-light: #F0DDD8;
+    --muted: #7A7268;
+    --rule: #DDD8D0;
+  }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    padding: 36px 40px;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 14px;
+    margin-bottom: 28px;
+  }
+
+  .header-left h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: -0.3px;
+    line-height: 1.1;
+  }
+
+  .header-left h1 em {
+    font-style: italic;
+    color: var(--rose);
+  }
+
+  .header-right {
+    text-align: right;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.8;
+  }
+
+  /* PRINCIPLES STRIP */
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-bottom: 28px;
+  }
+
+  .principle {
+    background: var(--cream);
+    padding: 12px 14px;
+  }
+
+  .principle .label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 3px;
+  }
+
+  .principle p {
+    font-size: 11.5px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  /* DAY CARDS */
+  .days {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .day-card {
+    border: 1px solid var(--rule);
+    background: #fff;
+  }
+
+  .day-header {
+    background: var(--ink);
+    color: #fff;
+    padding: 10px 14px;
+  }
+
+  .day-header .day-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 2px;
+  }
+
+  .day-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  .exercise-list {
+    padding: 0;
+    list-style: none;
+  }
+
+  .exercise-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--rule);
+    gap: 8px;
+  }
+
+  .exercise-item:last-child {
+    border-bottom: none;
+  }
+
+  .exercise-item.core {
+    background: var(--rose-light);
+  }
+
+  .exercise-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .exercise-item.core .exercise-name {
+    color: #7A3A2A;
+  }
+
+  .exercise-sets {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .exercise-item.core .exercise-sets {
+    color: #9A5A4A;
+  }
+
+  .core-tag {
+    font-size: 8.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--rose);
+    display: block;
+    margin-top: 1px;
+  }
+
+  /* NOTES */
+  .notes {
+    border-top: 1px solid var(--rule);
+    padding-top: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .note-block .note-title {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 6px;
+  }
+
+  .note-block p {
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  footer {
+    margin-top: 20px;
+    padding-top: 12px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--rule);
+  }
+
+  @media print {
+    body { padding: 20px 24px; }
+    .days { gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <h1>3-Day <em>Sculpt</em><br>& Tone Plan</h1>
+  </div>
+  <div class="header-right">
+    Rest 60–90 sec between sets<br>
+    Start light · Progress every 2–3 weeks<br>
+    Skip or shorten core on flare days
+  </div>
+</header>
+
+<div class="principles">
+  <div class="principle">
+    <div class="label">Focus</div>
+    <p>Glutes, toning, and full-body sculpt</p>
+  </div>
+  <div class="principle">
+    <div class="label">Approach</div>
+    <p>Light to start, building a lasting habit</p>
+  </div>
+  <div class="principle">
+    <div class="label">Core</div>
+    <p>Gentle, zero-compression movements only</p>
+  </div>
+</div>
+
+<div class="days">
+
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-label">Day 1</div>
+      <h2>Lower Body<br>Glute Focus</h2>
+    </div>
+    <ul class="exercise-list">
+      <li class="exercise-item">
+        <div>
+          <div class="exercise-name">Glute Bridge</div>
+        </div>
+        <div class="exercise-sets">3 × 12</div>
+      </li>
+      <li class="exercise-item">
+        <div>
+          <div class="exercise-name">Leg Press</div>
+          <div style="font-size:10.5px;color:var(--muted)">Feet high & wide</div>
+        </div>
+        <div class="exercise-sets">3 × 12</div>
+      </li>
+      <li class="exercise-item">
+        <div>
+          <div class="exercise-name">Cable Kickback</div>
+        </div>
+        <div class="exercise-sets">3 × 12 ea.</div>
+      </li>
+      <li class="exercise-item core">
+        <div>
+          <div class="exercise-name">Dead Bug</div>
+          <span class="core-tag">Core</span>
+        </div>
+        <div class="exercise-sets">3 × 8 ea.</div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-label">Day 2</div>
+      <h2>Upper Body<br>& Shoulders</h2>
+    </div>
+    <ul class="exercise-list">
+      <li class="exercise-item">
+        <div>
+          <div class="exercise-name">Seated DB Shoulder Press</div>
+        </div>
+        <div class="exercise-sets">3 × 12</div>
+      </li>
+      <li class="exercise-item">
+        <div>
+          <div class="exercise-name">Lat Pulldown</div>
+        </div>
+        <div class="exercise-sets">3 × 12</div>
+      </li>
+      <li class="exercise-item">
+        <div>
+          <div class="exercise-name">Seated Cable Row</div>
+        </div>
+        <div class="exercise-sets">3 × 12</div>
+      </li>
+      <li class="exercise-item core">
+        <div>
+          <div class="exercise-name">Pallof Press</div>
+          <span class="core-tag">Core</span>
+        </div>
+        <div class="exercise-sets">3 × 10 ea.</div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-label">Day 3</div>
+      <h2>Lower Body<br>Glute Burnout</h2>
+    </div>
+    <ul class="exercise-list">
+      <li class="exercise-item">
+        <div>
+          <div class="exercise-name">Romanian Deadlift</div>
+        </div>
+        <div class="exercise-sets">3 × 10</div>
+      </li>
+      <li class="exercise-item">
+        <div>
+          <div class="exercise-name">Hip Thrust</div>
+        </div>
+        <div class="exercise-sets">3 × 12</div>
+      </li>
+      <li class="exercise-item">
+        <div>
+          <div class="exercise-name">Seated Abductor Machine</div>
+        </div>
+        <div class="exercise-sets">3 × 15</div>
+      </li>
+      <li class="exercise-item core">
+        <div>
+          <div class="exercise-name">Bird Dog</div>
+          <span class="core-tag">Core</span>
+        </div>
+        <div class="exercise-sets">3 × 8 ea.</div>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="notes">
+  <div class="note-block">
+    <div class="note-title">Progression</div>
+    <p>Once a weight feels comfortable for 2–3 weeks, increase by the smallest increment available. Early on, focus on feeling the right muscle working — connection matters more than load.</p>
+  </div>
+  <div class="note-block">
+    <div class="note-title">Fibromyalgia Note</div>
+    <p>All core exercises are compression-free. On flare days, skip or shorten the core movement. Never push through midsection pain — the rest of the session still counts.</p>
+  </div>
+</div>
+
+<footer>
+  <span>3 days/week · Gym</span>
+  <span>Adjust as needed · Listen to your body</span>
+</footer>
+
+</body>
+</html>
